@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	// "os"
+	"os"
 	"strconv"
 	"strings"
 	// "strconv"
@@ -44,10 +44,8 @@ var arabToRome = map[int]string{
 }
 
 func main() {		
-	var string_enter string = "X+IX"
-	// fmt.Fscan( os.Stdin, &string_enter) 
-
-	// fmt.Println(string_enter)
+	var string_enter string
+	fmt.Fscan( os.Stdin, &string_enter) 
 
 	if strings.Contains(string_enter, "+"){
 		nums := strings.Split(string_enter, "+")
@@ -55,7 +53,6 @@ func main() {
 			if value2, flag := romeToArab[nums[1]]; flag {
 				res := value1 + value2
 				fmt.Println(Arab(res))
-				fmt.Println(res)
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
@@ -71,10 +68,14 @@ func main() {
 				fmt.Println(num1 + num2)
 			} 
 	} else if strings.Contains(string_enter, "-"){
-		nums := strings.Split(string_enter, "+")
+		nums := strings.Split(string_enter, "-")
 		if value1, flag := romeToArab[nums[0]]; flag {
 			if value2, flag := romeToArab[nums[1]]; flag {
-				fmt.Println(value1 - value2)
+				if value1 < value2{
+					panic("в римской системе нет отрицательных чисел")
+				}
+				res := (value1 - value2)
+				fmt.Println(Arab(res))
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
@@ -93,7 +94,8 @@ func main() {
 		nums := strings.Split(string_enter, "*")
 		if value1, flag := romeToArab[nums[0]]; flag {
 			if value2, flag := romeToArab[nums[1]]; flag {
-				fmt.Println(value1 * value2)
+				res := (value1 * value2)
+				fmt.Println(Arab(res))
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
@@ -112,7 +114,8 @@ func main() {
 		nums := strings.Split(string_enter, "/")
 		if value1, flag := romeToArab[nums[0]]; flag {
 			if value2, flag := romeToArab[nums[1]]; flag {
-				fmt.Println(value1 / value2)
+				res := (value1 / value2)
+				fmt.Println(Arab(res))
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
@@ -128,16 +131,14 @@ func main() {
 				fmt.Println(num1 / num2)
 			}
 	} 
-
 }
 
 func Arab(res int) string {
 	resRome := ""
-	i := 1
-	for ; res < 1; i++{
+	count := 1
+	for res > 0{
 		otv := res % 10
-		fmt.Println(arabToRome[20])
-		switch i {
+		switch count {
 			case 1:
 				resRome = arabToRome[otv] + resRome
 				res = res / 10
@@ -152,6 +153,7 @@ func Arab(res int) string {
 			default:
 				return "Hello"
 		}
+		count++
 	}
 	return resRome
 }
