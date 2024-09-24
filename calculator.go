@@ -46,31 +46,37 @@ var arabToRome = map[int]string{
 func main() {		
 	var string_enter string
 	fmt.Fscan( os.Stdin, &string_enter) 
-
-	if strings.Contains(string_enter, "+"){
-		nums := strings.Split(string_enter, "+")
-		if value1, flag := romeToArab[nums[0]]; flag {
-			if value2, flag := romeToArab[nums[1]]; flag {
+	splitFunc := func(r rune) bool {
+		return strings.ContainsRune("*%,/%,-%,+", r)
+	}
+	nummms := strings.FieldsFunc(string_enter, splitFunc)
+	if len(nummms) > 2{
+		panic("формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *).")
+	} else if len(nummms) < 2{
+		panic("строка не является математической операцией.")
+	} else if strings.Contains(string_enter, "+"){
+		// nums := strings.Split(string_enter, "+")
+		if value1, flag := romeToArab[nummms[0]]; flag {
+			if value2, flag := romeToArab[nummms[1]]; flag {
 				res := value1 + value2
 				fmt.Println(Arab(res))
 			} else {
-				panic("Неверный формат: Должны быть римские или арабские цифры")
+				panic("используются одновременно разные системы счисления.")
 			}
 		} else {
-				num1, err := strconv.Atoi(nums[0])
+				num1, err := strconv.Atoi(nummms[0])
 				if err != nil{
 					panic("Введено не число...")
 				}
-				num2, err := strconv.Atoi(nums[1])
+				num2, err := strconv.Atoi(nummms[1])
 				if err != nil{
 					panic("Введено не чило...")
 				}
 				fmt.Println(num1 + num2)
 			} 
 	} else if strings.Contains(string_enter, "-"){
-		nums := strings.Split(string_enter, "-")
-		if value1, flag := romeToArab[nums[0]]; flag {
-			if value2, flag := romeToArab[nums[1]]; flag {
+		if value1, flag := romeToArab[nummms[0]]; flag {
+			if value2, flag := romeToArab[nummms[1]]; flag {
 				if value1 < value2{
 					panic("в римской системе нет отрицательных чисел")
 				}
@@ -80,51 +86,49 @@ func main() {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
 		} else {
-				num1, err := strconv.Atoi(nums[0])
+				num1, err := strconv.Atoi(nummms[0])
 				if err != nil{
 					panic("Введено не число...")
 				}
-				num2, err := strconv.Atoi(nums[1])
+				num2, err := strconv.Atoi(nummms[1])
 				if err != nil{
 					panic("Введено не чило...")
 				}
 				fmt.Println(num1 - num2)
 			}
 	} else if strings.Contains(string_enter, "*"){
-		nums := strings.Split(string_enter, "*")
-		if value1, flag := romeToArab[nums[0]]; flag {
-			if value2, flag := romeToArab[nums[1]]; flag {
+		if value1, flag := romeToArab[nummms[0]]; flag {
+			if value2, flag := romeToArab[nummms[1]]; flag {
 				res := (value1 * value2)
 				fmt.Println(Arab(res))
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
 		} else {
-				num1, err := strconv.Atoi(nums[0])
+				num1, err := strconv.Atoi(nummms[0])
 				if err != nil{
 					panic("Введено не число...")
 				}
-				num2, err := strconv.Atoi(nums[1])
+				num2, err := strconv.Atoi(nummms[1])
 				if err != nil{
 					panic("Введено не чило...")
 				}
 				fmt.Println(num1 * num2)
 			}
 	} else if strings.Contains(string_enter, "/"){
-		nums := strings.Split(string_enter, "/")
-		if value1, flag := romeToArab[nums[0]]; flag {
-			if value2, flag := romeToArab[nums[1]]; flag {
+		if value1, flag := romeToArab[nummms[0]]; flag {
+			if value2, flag := romeToArab[nummms[1]]; flag {
 				res := (value1 / value2)
 				fmt.Println(Arab(res))
 			} else {
 				panic("Неверный формат: Должны быть римские или арабские цифры")
 			}
 		} else {
-				num1, err := strconv.Atoi(nums[0])
+				num1, err := strconv.Atoi(nummms[0])
 				if err != nil{
 					panic("Введено не число...")
 				}
-				num2, err := strconv.Atoi(nums[1])
+				num2, err := strconv.Atoi(nummms[1])
 				if err != nil{
 					panic("Введено не чило...")
 				}
