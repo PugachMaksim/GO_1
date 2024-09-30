@@ -106,7 +106,7 @@ func main() {
 						fmt.Println(num1 / num2)
 					}
 				} else {
-					fmt.Println("Не должно быть нуля, почему то")
+					panic("Не должно быть нуля, почему то")
 				}
 			}
 		} 
