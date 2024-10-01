@@ -71,7 +71,11 @@ func main() {
 					fmt.Println(Arab(res))
 				} else if strings.Contains(string_enter, "/"){
 					res := (value1 / value2)
-					fmt.Println(Arab(res))
+					if value1 % value2 == 0{
+						fmt.Println(Arab(res))
+					} else {
+						panic("Не целое число!!!")
+					}
 				} 
 			} else {
 				value2, err := strconv.Atoi(nummms[1])
@@ -83,7 +87,7 @@ func main() {
 		} else {
 			num1, err := strconv.Atoi(nummms[0])
 			if err != nil{
-				panic("Введено не число...")
+				panic("Введено не целое число 1")
 			}
 			if num2_2, flag := romeToArab[nummms[1]]; flag {
 				_ = num2_2
@@ -91,20 +95,18 @@ func main() {
 			} else {
 				num2, err := strconv.Atoi(nummms[1])
 				if err != nil{
-					panic("Введено не чило...")
+					panic("Введено не целое число 2")
 				}
 				if num1 != 0 && num2 !=0{
 					if strings.Contains(string_enter, "+"){
 					fmt.Println(num1 + num2)
-					} else if strings.Contains(string_enter, "+"){
-						fmt.Println(num1 + num2)
 					} else if strings.Contains(string_enter, "-"){
 						fmt.Println(num1 - num2)
 					} else if strings.Contains(string_enter, "*"){
 						fmt.Println(num1 * num2)
 					} else if strings.Contains(string_enter, "/"){
-						fmt.Println(num1 / num2)
-					}
+						fmt.Println(float64(num1) / float64(num2))
+					}		
 				} else {
 					panic("Не должно быть нуля, почему то")
 				}
