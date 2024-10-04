@@ -67,13 +67,16 @@ func main() {
 							panic("в римской системе нет отрицательных чисел")
 						}
 						res := (value1 - value2)
+						if res == 0 {
+							panic("Ноль, ошибка")
+						}
 						fmt.Println(Arab(res))
 					} else if strings.Contains(string_enter, "*") {
 						res := (value1 * value2)
 						fmt.Println(Arab(res))
 					} else if strings.Contains(string_enter, "/") {
 						res := (value1 / value2)
-						if value1%value2 == 0 {
+						if value1 % value2 == 0 {
 							fmt.Println(Arab(res))
 						} else {
 							panic("Не целое число!!!")
