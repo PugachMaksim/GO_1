@@ -103,7 +103,7 @@ func main() {
 				}
 				panic("Введено не целое число 2")
 			} else {
-				if num1 != 0 && num2 != 0 {
+				if num1 > 0 && num1 < 11 && num2 > 0 && num2 < 11 {
 					if strings.Contains(string_enter, "+") {
 						fmt.Println(num1 + num2)
 					} else if strings.Contains(string_enter, "-") {
@@ -114,7 +114,7 @@ func main() {
 						fmt.Println(num1 / num2)
 					}
 				} else {
-					panic("Не должно быть нуля, почему то")
+					panic("число должно быть от 1 до 10")
 				}
 			}
 		}
