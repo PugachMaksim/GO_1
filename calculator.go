@@ -111,7 +111,7 @@ func main() {
 					} else if strings.Contains(string_enter, "*") {
 						fmt.Println(num1 * num2)
 					} else if strings.Contains(string_enter, "/") {
-						fmt.Println(float64(num1) / float64(num2))
+						fmt.Println(num1 / num2)
 					}
 				} else {
 					panic("Не должно быть нуля, почему то")
